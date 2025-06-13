@@ -51,9 +51,9 @@ const SearchInputWithSuggestions = ({
                 onClick={() => handleLocationClick(location)}
                 className="w-full text-left px-4 py-3 hover:bg-white/10 transition-colors border-b border-white/10 last:border-b-0 justify-start"
               >
-                <div className="flex items-center justify-between w-full">
-                  <span className="text-gray-800 font-medium">{location.city}</span>
-                  <span className="text-gray-600 text-sm">{location.country}</span>
+<div className="flex items-center justify-between w-full">
+                  <span className="text-stone-800 font-medium">{location.city}</span>
+                  <span className="text-stone-600 text-sm">{location.country}</span>
                 </div>
               </Button>
             ))}

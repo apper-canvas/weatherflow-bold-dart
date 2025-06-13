@@ -44,13 +44,13 @@ const MainFeature = ({
   // Loading State
   if (loading) {
     return (
-      <div className="space-y-8">
+<div className="space-y-8">
         {/* Search Bar Skeleton */}
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-          <div className="animate-pulse bg-white/20 h-12 rounded-lg flex-1 max-w-md"></div>
+          <div className="animate-pulse bg-orange-200/40 h-12 rounded-lg flex-1 max-w-md"></div>
           <div className="flex gap-2">
-            <div className="animate-pulse bg-white/20 h-12 w-12 rounded-lg"></div>
-            <div className="animate-pulse bg-white/20 h-12 w-20 rounded-lg"></div>
+            <div className="animate-pulse bg-orange-200/40 h-12 w-12 rounded-lg"></div>
+            <div className="animate-pulse bg-orange-200/40 h-12 w-20 rounded-lg"></div>
           </div>
         </div>
 
@@ -61,12 +61,12 @@ const MainFeature = ({
           className="glass-effect rounded-2xl p-8 text-center"
         >
           <div className="animate-pulse space-y-4">
-            <div className="bg-white/20 h-8 w-48 mx-auto rounded"></div>
-            <div className="bg-white/20 h-24 w-24 mx-auto rounded-full"></div>
-            <div className="bg-white/20 h-16 w-32 mx-auto rounded"></div>
+            <div className="bg-orange-200/40 h-8 w-48 mx-auto rounded"></div>
+            <div className="bg-orange-200/40 h-24 w-24 mx-auto rounded-full"></div>
+            <div className="bg-orange-200/40 h-16 w-32 mx-auto rounded"></div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-white/20 h-16 rounded-lg"></div>
+                <div key={i} className="bg-orange-200/40 h-16 rounded-lg"></div>
               ))}
             </div>
           </div>
@@ -82,10 +82,10 @@ const MainFeature = ({
               transition={{ delay: i * 0.1 }}
               className="glass-effect rounded-xl p-4 animate-pulse"
             >
-              <div className="bg-white/20 h-4 w-16 mx-auto mb-3 rounded"></div>
-              <div className="bg-white/20 h-12 w-12 mx-auto mb-3 rounded-full"></div>
-              <div className="bg-white/20 h-4 w-12 mx-auto mb-1 rounded"></div>
-              <div className="bg-white/20 h-3 w-8 mx-auto rounded"></div>
+              <div className="bg-orange-200/40 h-4 w-16 mx-auto mb-3 rounded"></div>
+              <div className="bg-orange-200/40 h-12 w-12 mx-auto mb-3 rounded-full"></div>
+              <div className="bg-orange-200/40 h-4 w-12 mx-auto mb-1 rounded"></div>
+              <div className="bg-orange-200/40 h-3 w-8 mx-auto rounded"></div>
             </motion.div>
           ))}
         </div>
@@ -101,9 +101,9 @@ const MainFeature = ({
         animate={{ opacity: 1, scale: 1 }}
         className="glass-effect rounded-2xl p-8 text-center"
       >
-        <ApperIcon name="AlertCircle" className="w-16 h-16 text-red-500 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">Weather Data Unavailable</h3>
-        <p className="text-gray-600 mb-6">{error}</p>
+<ApperIcon name="AlertCircle" className="w-16 h-16 text-red-500 mx-auto mb-4" />
+        <h3 className="text-xl font-semibold text-stone-800 mb-2">Weather Data Unavailable</h3>
+        <p className="text-stone-600 mb-6">{error}</p>
         <Button
           onClick={onRetry}
           className="px-6 py-3 bg-primary text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
@@ -118,7 +118,7 @@ const MainFeature = ({
 
   return (
     <div className="space-y-8">
-      {/* Search and Controls */}
+{/* Search and Controls */}
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
         <SearchInputWithSuggestions
           searchQuery={searchQuery}
@@ -131,15 +131,15 @@ const MainFeature = ({
         <div className="flex gap-2">
           <Button
             onClick={onGeolocation}
-            className="glass-effect p-3 rounded-lg hover:bg-white/20 transition-all duration-200"
+            className="glass-effect p-3 rounded-lg hover:bg-orange-100/30 transition-all duration-200"
             title="Use current location"
             icon="MapPin"
-            iconClass="w-6 h-6 text-gray-700"
+            iconClass="w-6 h-6 text-stone-700"
           />
           
           <Button
             onClick={onToggleUnit}
-            className="glass-effect px-4 py-3 rounded-lg hover:bg-white/20 transition-all duration-200 font-medium text-gray-700"
+            className="glass-effect px-4 py-3 rounded-lg hover:bg-orange-100/30 transition-all duration-200 font-medium text-stone-700"
           >
             {unit === 'metric' ? '°F' : '°C'}
           </Button>
@@ -154,10 +154,10 @@ const MainFeature = ({
           className="glass-effect rounded-2xl p-8"
         >
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">
+<h1 className="text-2xl font-bold text-stone-800 mb-2">
               {currentLocation?.city}, {currentLocation?.country}
             </h1>
-            <p className="text-gray-600 capitalize">{weatherData.description}</p>
+            <p className="text-stone-600 capitalize">{weatherData.description}</p>
           </div>
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
@@ -167,7 +167,7 @@ const MainFeature = ({
             >
               <ApperIcon 
                 name={getWeatherIcon(weatherData.condition)} 
-                className={`w-24 h-24 text-gray-700 ${weatherTheme === 'sunny' ? 'weather-rotate' : ''}`}
+                className={`w-24 h-24 text-stone-700 ${weatherTheme === 'sunny' ? 'weather-rotate' : ''}`}
               />
             </motion.div>
             
@@ -176,18 +176,18 @@ const MainFeature = ({
                 key={weatherData.temperature}
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-6xl md:text-7xl font-bold text-gray-800 font-heading"
+                className="text-6xl md:text-7xl font-bold text-stone-800 font-heading"
               >
                 {Math.round(weatherData.temperature)}{getUnitSymbol()}
               </motion.div>
-              <p className="text-gray-600 text-lg mt-2">
+              <p className="text-stone-600 text-lg mt-2">
                 Feels like {Math.round(weatherData.feelsLike)}{getUnitSymbol()}
               </p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <WeatherDetailItem 
+<WeatherDetailItem 
               iconName="Droplets" 
               iconClass="text-blue-500" 
               label="Humidity" 
@@ -196,7 +196,7 @@ const MainFeature = ({
             
             <WeatherDetailItem 
               iconName="Wind" 
-              iconClass="text-gray-500" 
+              iconClass="text-stone-500" 
               label="Wind Speed" 
               value={`${weatherData.windSpeed} ${getWindUnit()}`} 
             />
@@ -221,7 +221,7 @@ const MainFeature = ({
       {/* 5-Day Forecast */}
       {forecast.length > 0 && (
         <div>
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">5-Day Forecast</h2>
+<h2 className="text-xl font-semibold text-stone-800 mb-4">5-Day Forecast</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {forecast.map((day, index) => (
               <ForecastCard

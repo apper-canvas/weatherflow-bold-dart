@@ -32,7 +32,7 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="light"
+theme="colored"
           className="z-[9999]"
         />
       </div>
