@@ -1,4 +1,4 @@
-import Home from '../pages/Home';
+import HomePage from '@/components/pages/HomePage';
 
 export const routes = {
   home: {
@@ -6,7 +6,8 @@ export const routes = {
     label: 'Weather Dashboard',
     path: '/',
     icon: 'Cloud',
-    component: Home
+icon: 'Cloud',
+    component: HomePage
   }
 };
 

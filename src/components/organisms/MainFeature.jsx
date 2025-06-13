@@ -1,6 +1,9 @@
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ApperIcon from './ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
+import SearchInputWithSuggestions from '@/components/molecules/SearchInputWithSuggestions';
+import WeatherDetailItem from '@/components/molecules/WeatherDetailItem';
+import ForecastCard from '@/components/molecules/ForecastCard';
 
 const MainFeature = ({
   weatherData,
@@ -19,20 +22,6 @@ const MainFeature = ({
   weatherTheme,
   onRetry
 }) => {
-  const [showSuggestions, setShowSuggestions] = useState(false);
-
-  const handleSearchInputChange = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    onSearch(query);
-    setShowSuggestions(query.length > 0);
-  };
-
-  const handleLocationClick = (location) => {
-    onLocationSelect(location);
-    setShowSuggestions(false);
-  };
-
   const getWeatherIcon = (condition) => {
     const conditionLower = condition?.toLowerCase() || '';
     if (conditionLower.includes('sun') || conditionLower.includes('clear')) return 'Sun';
@@ -115,15 +104,14 @@ const MainFeature = ({
         <ApperIcon name="AlertCircle" className="w-16 h-16 text-red-500 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-gray-800 mb-2">Weather Data Unavailable</h3>
         <p className="text-gray-600 mb-6">{error}</p>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <Button
           onClick={onRetry}
           className="px-6 py-3 bg-primary text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+          icon="RefreshCw"
+          iconClass="w-5 h-5"
         >
-          <ApperIcon name="RefreshCw" className="w-5 h-5 inline mr-2" />
           Try Again
-        </motion.button>
+        </Button>
       </motion.div>
     );
   }
@@ -132,64 +120,29 @@ const MainFeature = ({
     <div className="space-y-8">
       {/* Search and Controls */}
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div className="relative flex-1 max-w-md w-full">
-          <div className="relative">
-            <ApperIcon name="Search" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search for a city..."
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-              onFocus={() => setShowSuggestions(searchQuery.length > 0)}
-              className="w-full pl-10 pr-4 py-3 glass-effect rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/30"
-            />
-          </div>
-          
-          <AnimatePresence>
-            {showSuggestions && searchSuggestions.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="absolute top-full mt-2 w-full glass-effect rounded-lg overflow-hidden z-10"
-              >
-                {searchSuggestions.map((location, index) => (
-                  <motion.button
-                    key={`${location.city}-${location.country}-${index}`}
-                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
-                    onClick={() => handleLocationClick(location)}
-                    className="w-full text-left px-4 py-3 hover:bg-white/10 transition-colors border-b border-white/10 last:border-b-0"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-800 font-medium">{location.city}</span>
-                      <span className="text-gray-600 text-sm">{location.country}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <SearchInputWithSuggestions
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          searchSuggestions={searchSuggestions}
+          onSearch={onSearch}
+          onLocationSelect={onLocationSelect}
+        />
 
         <div className="flex gap-2">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Button
             onClick={onGeolocation}
             className="glass-effect p-3 rounded-lg hover:bg-white/20 transition-all duration-200"
             title="Use current location"
-          >
-            <ApperIcon name="MapPin" className="w-6 h-6 text-gray-700" />
-          </motion.button>
+            icon="MapPin"
+            iconClass="w-6 h-6 text-gray-700"
+          />
           
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Button
             onClick={onToggleUnit}
             className="glass-effect px-4 py-3 rounded-lg hover:bg-white/20 transition-all duration-200 font-medium text-gray-700"
           >
             {unit === 'metric' ? '°F' : '°C'}
-          </motion.button>
+          </Button>
         </div>
       </div>
 
@@ -234,29 +187,33 @@ const MainFeature = ({
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="glass-effect rounded-lg p-4 text-center">
-              <ApperIcon name="Droplets" className="w-6 h-6 text-blue-500 mx-auto mb-2" />
-              <p className="text-sm text-gray-600">Humidity</p>
-              <p className="text-lg font-semibold text-gray-800">{weatherData.humidity}%</p>
-            </div>
+            <WeatherDetailItem 
+              iconName="Droplets" 
+              iconClass="text-blue-500" 
+              label="Humidity" 
+              value={`${weatherData.humidity}%`} 
+            />
             
-            <div className="glass-effect rounded-lg p-4 text-center">
-              <ApperIcon name="Wind" className="w-6 h-6 text-gray-500 mx-auto mb-2" />
-              <p className="text-sm text-gray-600">Wind Speed</p>
-              <p className="text-lg font-semibold text-gray-800">{weatherData.windSpeed} {getWindUnit()}</p>
-            </div>
+            <WeatherDetailItem 
+              iconName="Wind" 
+              iconClass="text-gray-500" 
+              label="Wind Speed" 
+              value={`${weatherData.windSpeed} ${getWindUnit()}`} 
+            />
             
-            <div className="glass-effect rounded-lg p-4 text-center">
-              <ApperIcon name="Eye" className="w-6 h-6 text-purple-500 mx-auto mb-2" />
-              <p className="text-sm text-gray-600">Visibility</p>
-              <p className="text-lg font-semibold text-gray-800">10 km</p>
-            </div>
+            <WeatherDetailItem 
+              iconName="Eye" 
+              iconClass="text-purple-500" 
+              label="Visibility" 
+              value="10 km" 
+            />
             
-            <div className="glass-effect rounded-lg p-4 text-center">
-              <ApperIcon name="Gauge" className="w-6 h-6 text-green-500 mx-auto mb-2" />
-              <p className="text-sm text-gray-600">Pressure</p>
-              <p className="text-lg font-semibold text-gray-800">1013 hPa</p>
-            </div>
+            <WeatherDetailItem 
+              iconName="Gauge" 
+              iconClass="text-green-500" 
+              label="Pressure" 
+              value="1013 hPa" 
+            />
           </div>
         </motion.div>
       )}
@@ -267,39 +224,14 @@ const MainFeature = ({
           <h2 className="text-xl font-semibold text-gray-800 mb-4">5-Day Forecast</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {forecast.map((day, index) => (
-              <motion.div
+              <ForecastCard
                 key={day.date}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="glass-effect rounded-xl p-4 text-center hover:shadow-lg transition-all duration-200"
-              >
-                <p className="text-sm font-medium text-gray-700 mb-3">
-                  {formatDate(day.date)}
-                </p>
-                
-                <ApperIcon 
-                  name={getWeatherIcon(day.condition)} 
-                  className="w-10 h-10 text-gray-700 mx-auto mb-3" 
-                />
-                
-                <div className="space-y-1">
-                  <p className="text-lg font-semibold text-gray-800">
-                    {Math.round(day.tempHigh)}{getUnitSymbol()}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    {Math.round(day.tempLow)}{getUnitSymbol()}
-                  </p>
-                </div>
-                
-                {day.precipitation > 0 && (
-                  <div className="flex items-center justify-center mt-2">
-                    <ApperIcon name="Droplets" className="w-3 h-3 text-blue-500 mr-1" />
-                    <span className="text-xs text-gray-600">{day.precipitation}%</span>
-                  </div>
-                )}
-              </motion.div>
+                day={day}
+                index={index}
+                formatDate={formatDate}
+                getWeatherIcon={getWeatherIcon}
+                getUnitSymbol={getUnitSymbol}
+              />
             ))}
           </div>
         </div>
