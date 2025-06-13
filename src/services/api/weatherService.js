@@ -59,7 +59,27 @@ const weatherService = {
       city: 'Current Location',
       country: 'US',
       lat: lat,
-      lon: lon,
+lon: lon,
+      
+      // Enhanced search that includes global cities
+      async searchLocations(query) {
+        await delay(300);
+        
+        // Filter global cities based on query
+        const globalCities = locationsData.filter(location => 
+          location.city.toLowerCase().includes(query.toLowerCase())
+        );
+        
+        // For now, return filtered global cities
+        // In a real app, you might combine with API results
+        return globalCities.map(location => ({
+          city: location.city,
+          country: location.country,
+          lat: location.lat,
+          lon: location.lon,
+          timezone: location.timezone
+        }));
+      },
       timezone: 'America/New_York'
     };
   }
