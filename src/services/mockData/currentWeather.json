@@ -1,0 +1,15 @@
+{
+  "temperature": 22,
+  "feelsLike": 25,
+  "condition": "Partly Cloudy",
+  "description": "partly cloudy with light breeze",
+  "humidity": 65,
+  "windSpeed": 15,
+  "icon": "partly-cloudy",
+  "timestamp": "2024-01-15T14:30:00Z",
+  "visibility": 10,
+  "pressure": 1013,
+  "uvIndex": 6,
+  "sunrise": "06:45",
+  "sunset": "18:20"
+}

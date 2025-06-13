@@ -1,0 +1,47 @@
+[
+  {
+    "date": "2024-01-16",
+    "tempHigh": 24,
+    "tempLow": 16,
+    "condition": "Sunny",
+    "icon": "sunny",
+    "precipitation": 10,
+    "description": "Clear skies with sunshine"
+  },
+  {
+    "date": "2024-01-17",
+    "tempHigh": 26,
+    "tempLow": 18,
+    "condition": "Partly Cloudy",
+    "icon": "partly-cloudy",
+    "precipitation": 20,
+    "description": "Partly cloudy with scattered clouds"
+  },
+  {
+    "date": "2024-01-18",
+    "tempHigh": 21,
+    "tempLow": 14,
+    "condition": "Rainy",
+    "icon": "rainy",
+    "precipitation": 85,
+    "description": "Light rain throughout the day"
+  },
+  {
+    "date": "2024-01-19",
+    "tempHigh": 19,
+    "tempLow": 12,
+    "condition": "Cloudy",
+    "icon": "cloudy",
+    "precipitation": 30,
+    "description": "Overcast with gray skies"
+  },
+  {
+    "date": "2024-01-20",
+    "tempHigh": 23,
+    "tempLow": 15,
+    "condition": "Sunny",
+    "icon": "sunny",
+    "precipitation": 5,
+    "description": "Bright sunshine all day"
+  }
+]
